@@ -88,6 +88,9 @@ until the game is restarted.
 ------------
 - Gameplay and real-time cutscenes run at 60 fps. Prerecorded videos keep stock
   30 fps pacing, so they no longer play fast or end early.
+- EE OVERCLOCK REQUIRED: set PCSX2's EE Cycle Rate to 130% (Settings > Emulation >
+  System Settings, EE Cycle Rate; the exact menu name can differ between versions).
+  Without it the game cannot hold 60 fps.
 
 KNOWN LIMITATIONS
 -----------------
