@@ -1,0 +1,118 @@
+PRIMAL (PS2) - MULTI-RATIO WIDESCREEN + 60 FPS PATCH FOR PCSX2
+INSTALL INSTRUCTIONS
+================================================================
+
+REQUIREMENTS
+------------
+- PCSX2 (a recent version with patch/pnach support).
+- Primal, NTSC-U disc image: serial SCUS-97142, CRC FCD89DC3.
+  Other regions will NOT work, their addresses differ.
+- Your own legally obtained copy of the game. This patch contains no game data.
+
+BEFORE YOU START (RECOMMENDED)
+------------------------------
+- Back up any existing Primal file in your PCSX2 "patches" folder (and any "cheats"
+  file for Primal) before you copy anything.
+- The patch does not touch the disc image, memory cards or save states.
+- If you use PCSX2 in portable mode, everything below is relative to the PCSX2
+  folder that contains portable.ini / portable.txt.
+
+STEP 1 - COPY THE PATCH
+-----------------------
+Copy   patches/FCD89DC3.pnach   into PCSX2's "patches" folder.
+
+Where is that folder?
+  - Portable install: <PCSX2 folder>\patches
+  - Standard install (Windows): Documents\PCSX2\patches
+  - Linux: ~/.config/PCSX2/patches
+  - macOS: ~/Library/Application Support/PCSX2/patches
+  (In PCSX2: Settings > Folders shows the exact path.)
+
+The file name must stay exactly FCD89DC3.pnach (it matches the game's CRC).
+If a file with that name already exists, back it up first.
+
+STEP 2 - ENABLE PATCHES IN PCSX2
+--------------------------------
+1. Open Settings > Advanced (or Settings > Emulation, depending on version).
+2. Make sure "Enable Cheats / Enable Patches" is turned ON.
+3. Do not use Primal's old 60 fps cheat in the "cheats" folder together with this
+   patch. Keep Primal's cheats OFF.
+
+STEP 3 - PICK A RATIO SECTION
+-----------------------------
+1. Right-click Primal in the game list > Properties (Game Properties) > Patches.
+2. Tick ONE widescreen section only:
+     Widescreen 21:9 (Hor+)
+     Widescreen 32:9 (Hor+)
+     Widescreen 48:9 (Hor+, experimental)
+     Widescreen 16:10 (Vert+)
+     Widescreen 3:2 (Vert+)
+3. Optionally also tick:  60 FPS (video-aware)
+   It can be combined with any one widescreen section.
+4. Leave 16:9 and 4:3 to the game itself (no section needed).
+
+Sections that are not ticked do nothing.
+
+STEP 4 - SET THE GAME OPTION
+----------------------------
+In Primal: Options > Display > widescreen = ON.
+The patch only acts when the game's own widescreen option is ON.
+With it OFF, the game stays stock 4:3 under every section.
+
+STEP 5 - SET UP PCSX2 DISPLAY SETTINGS
+--------------------------------------
+Graphics settings (Settings > Graphics > Display):
+  - Aspect Ratio: set to "Stretch to Window" (or "Auto Standard" if you want the
+    picture to fill the window). The game renders a 4:3-sized framebuffer and
+    the patch makes the picture correct when it is stretched to your window.
+    Resize the window (or use fullscreen) at the ratio you picked, for example
+    64:27 for 21:9.
+  - FMV Aspect Ratio Override: set to "Widescreen (16:9)".
+    Videos are pre-rendered, so they cannot be widened. With this set they play
+    pillarboxed with correct proportions. With it OFF they stretch.
+
+STEP 6 - START THE GAME
+-----------------------
+Boot the game. The ratio takes effect when the camera is next set up: a scene
+change, a cutscene, or toggling the in-game widescreen option OFF and ON.
+If you load an old save, the patch is re-applied every frame, so a
+scene change or toggling the option is enough.
+
+CHANGING RATIO LATER
+--------------------
+Untick the old section, tick the new one, then RESTART the game. Switching
+sections while the game is running can leave the old section's code in memory
+until the game is restarted.
+
+60 FPS NOTES
+------------
+- Gameplay and real-time cutscenes run at 60 fps. Prerecorded videos keep stock
+  30 fps pacing, so they no longer play fast or end early.
+
+KNOWN LIMITATIONS
+-----------------
+- The gameplay HUD is not corrected and stretches at ratios wider than 16:9.
+- Pause menu main panels, text and map stay stretched (stock widescreen
+  behaviour). Only the side column (logo, orbs, portrait, icons) is corrected.
+- Loading screens stretch at wide ratios.
+- 48:9 shows blue void at the sides (sky/backdrop does not reach the edges).
+- NTSC-U (SCUS-97142, CRC FCD89DC3) only.
+
+TROUBLESHOOTING
+---------------
+- No patches listed in Game Properties: check the file is named FCD89DC3.pnach,
+  is in the correct patches folder, and that your game's CRC is FCD89DC3
+  (shown in PCSX2's game list and log).
+- Picture looks stretched: make sure the in-game widescreen option is ON, only
+  one ratio section is ticked, the PCSX2 window matches the ratio you picked and
+  the aspect ratio setting is Stretch/Auto, then change scene or toggle the option.
+- Nothing changes: restart the game after changing sections.
+- Videos look stretched: set FMV Aspect Ratio Override to Widescreen (16:9).
+- Problem with another patch: other Primal pnach files can conflict. Keep only
+  this one enabled. The patch uses free RAM at 0x000F8000 and 0x000F8040.
+
+UNINSTALL
+---------
+Delete patches/FCD89DC3.pnach from PCSX2's patches folder (restore your backup
+if you made one), and restore the FMV Aspect Ratio Override setting if you
+changed it.
