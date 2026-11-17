@@ -1,0 +1,90 @@
+gametitle=Primal (NTSC-U) [SCUS-97142] (FCD89DC3)
+
+// Widescreen sections: tick ONE ratio only. Keep the in-game option Options > Display > widescreen ON.
+// With in-game widescreen OFF the game stays stock 4:3 under every section.
+// Hor+ = wider than 16:9, extra view left/right. Vert+ = narrower than 16:9, same width as 16:9, extra view top/bottom.
+// Pause menu: only the side column (logo, orbs, portrait, icons) is corrected; panels/text stay stretched.
+// Gameplay HUD is not corrected. FMVs: set PCSX2 FMV Aspect Ratio to Widescreen (16:9).
+// Changes take effect on the next camera setup (scene change, cutscene, or toggling in-game widescreen).
+// Switching sections while running may leave the previous section's code until the game is restarted.
+
+[Widescreen 21:9 (Hor+)]
+author=Sevastopol
+description=64:27 (2.3704). Tick one ratio only. In-game widescreen must be ON.
+patch=1,EE,00260798,word,3C014017
+patch=1,EE,0026079C,word,3421B426
+patch=1,EE,001F2774,word,3C014017
+patch=1,EE,001F2778,word,3421B426
+patch=1,EE,00117E94,word,3C013F10
+
+[Widescreen 32:9 (Hor+)]
+author=Sevastopol
+description=32:9 (3.5556). Tick one ratio only. In-game widescreen must be ON.
+patch=1,EE,00260798,word,3C014063
+patch=1,EE,0026079C,word,34218E39
+patch=1,EE,001F2774,word,3C014063
+patch=1,EE,001F2778,word,34218E39
+patch=1,EE,00117E94,word,3C013EC0
+
+[Widescreen 48:9 (Hor+, experimental)]
+author=Sevastopol
+description=48:9 (5.3333). Sky/backdrop does not reach the screen edges. Tick one ratio only. In-game widescreen must be ON.
+patch=1,EE,00260798,word,3C0140AA
+patch=1,EE,0026079C,word,3421AAAB
+patch=1,EE,001F2774,word,3C0140AA
+patch=1,EE,001F2778,word,3421AAAB
+patch=1,EE,00117E94,word,3C013E80
+
+[Widescreen 16:10 (Vert+)]
+author=Sevastopol
+description=16:10 (1.6). Same width as 16:9, more top/bottom. Tick one ratio only. In-game widescreen must be ON.
+// widescreen branch jumps to code at 0x000F8000: aspect 1.6, field of view x 1.111111
+patch=1,EE,000F8000,word,3421CCCD
+patch=1,EE,000F8004,word,44816800
+patch=1,EE,000F8008,word,3C013C9E
+patch=1,EE,000F800C,word,3421DD1D
+patch=1,EE,000F8010,word,44810000
+patch=1,EE,000F8014,word,00000000
+patch=1,EE,000F8018,word,080981E9
+patch=1,EE,000F801C,word,46000B02
+patch=1,EE,00260798,word,0803E000
+patch=1,EE,0026079C,word,3C013FCC
+patch=1,EE,001F2774,word,3C013FCC
+patch=1,EE,001F2778,word,3421CCCD
+patch=1,EE,00117E94,word,3C013F40
+
+[Widescreen 3:2 (Vert+)]
+author=Sevastopol
+description=3:2 (1.5). Same width as 16:9, more top/bottom. Tick one ratio only. In-game widescreen must be ON.
+// widescreen branch jumps to code at 0x000F8000: aspect 1.5, field of view x 1.185185
+patch=1,EE,000F8000,word,34210000
+patch=1,EE,000F8004,word,44816800
+patch=1,EE,000F8008,word,3C013CA9
+patch=1,EE,000F800C,word,34217464
+patch=1,EE,000F8010,word,44810000
+patch=1,EE,000F8014,word,00000000
+patch=1,EE,000F8018,word,080981E9
+patch=1,EE,000F801C,word,46000B02
+patch=1,EE,00260798,word,0803E000
+patch=1,EE,0026079C,word,3C013FC0
+patch=1,EE,001F2774,word,3C013FC0
+patch=1,EE,001F2778,word,34210000
+patch=1,EE,00117E94,word,3C013F40
+
+[60 FPS (video-aware)]
+author=Sevastopol (video-aware hook). Based on the 60 fps code 204874FC=1, reportedly by asasega (unverified)
+description=60 fps in gameplay and real-time cutscenes; prerecorded videos keep stock 30 fps pacing so they no longer play too fast or end early. Do not use together with the old 60 fps cheat. Can be combined with any one widescreen section.
+// vsync handler 0x002F7638 reloads its countdown from the frame divider 0x004874FC (stock 2).
+// Hook: if no video is playing (movie buffer ptr 0x0048772C == 0) and divider == 2, count to 1 instead.
+patch=1,EE,000F8040,word,3C040049
+patch=1,EE,000F8044,word,8C8486B4
+patch=1,EE,000F8048,word,8F81A23C
+patch=1,EE,000F804C,word,14200004
+patch=1,EE,000F8050,word,00000000
+patch=1,EE,000F8054,word,24010002
+patch=1,EE,000F8058,word,50410001
+patch=1,EE,000F805C,word,24020001
+patch=1,EE,000F8060,word,080BDD9B
+patch=1,EE,000F8064,word,00000000
+patch=1,EE,002F7668,word,00000000
+patch=1,EE,002F7664,word,0803E010
