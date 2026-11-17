@@ -52,7 +52,7 @@ See [`INSTALL.txt`](INSTALL.txt) for step-by-step instructions. Short version:
 2. Enable *Enable Patches* in PCSX2, then tick **one** ratio section (and optionally *60 FPS (video-aware)*) under
    *Game Properties > Patches*.
 3. Turn ON *Options > Display > widescreen* in the game.
-4. Set PCSX2's *FMV Aspect Ratio* to *Widescreen (16:9)* and the display aspect ratio to *Stretch to window / Auto*.
+4. Set PCSX2's *FMV Aspect Ratio* to *Widescreen (16:9)* {not needed for 21:9 or widescreen off} and the display aspect ratio to *Stretch to window / Auto*.
 5. For the 60 FPS section, set PCSX2's EE Cycle Rate to 130%.
 
 ## How it works
